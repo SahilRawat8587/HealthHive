@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>HealthHive-Quiz</title>
+
+    <!-- Favicon and Apple icons -->
+    <link href="icons/favicon.png" rel="icon">
+    <link href="icons/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="icons/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Bootstrap and Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    
+    <!-- Select2 Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+    <link href="css/main.css" rel="stylesheet"/>
+
+    <style>
+        
+        /* Base styles */
+        
+
+        h3, h4 {
+            color: #333;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        
+        /* Global styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            
+            
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        /* Container styles */
+        #game-container {
+            background: linear-gradient(135deg, #cdffd8 , #94b9ff); /* Aesthetic green gradient */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            transition: transform 0.3s ease;
+        }
+
+        #game-container h1{
+            font-weight: 700;
+        }
+
+        #game-container:hover {
+            transform: scale(1.05); /* Subtle zoom-in effect */
+        }
+
+        /* Color display box */
+        #color-display {
+            width: 200px;
+            height: 100px;
+            margin: 20px auto;
+            background-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button styles */
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Color option buttons */
+        .color-option {
+            width: 50px;
+            height: 50px;
+            margin: 10px 5px;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Instructions and score display */
+        #instructions, #score, #high-score, #target-color {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+    
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive styling */
+        @media (max-width: 767px) {
+            .card {
+                margin-bottom: 20px;
+            }
+        }
+    
+       
+
+        .hero{
+            background: url(./assets/Bg.png) repeat ;
+            display: flex;
+            justify-content: center;
+            padding: 20vh;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <!-- Header Section -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container">
+  <a class="navbar-brand" href="./Index.html">HealthHive</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="./Index.html">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Blog</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+      </li>
+      <!-- Dropdown for Services -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Services
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+          <li><a class="dropdown-item" href="./tdee.html">TDEE Calculator</a></li>
+          <li><a class="dropdown-item" href="./pediction.html">Cancer Prediction</a></li>
+          <li><a class="dropdown-item" href="./quiz.html">Mental Health Quiz</a></li>
+          <li><a class="dropdown-item" href="#">Game</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Login Button -->
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="btn btn-outline-primary" href="#">Login</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+</header>
+
+<div class="hero">
+<div id="game-container" >
+    <h1 >Color Match Game</h1>
+    <p id="instructions">Are you ready for this small mind exercise game? Click start to begin.</p>
+
+    <input type="checkbox" id="game-start-checkbox" onchange="toggleStartButton()">
+    <label id="game-start-checkbox-l" for="game-start-checkbox">I'm ready!</label>
+
+    <button id="start-button" disabled onclick="startGame()">Start Game</button>
+
+    <div id="game-content" style="display: none;">
+        <p id="score">Score: 0</p>
+        <p id="high-score">High Score: 0</p>
+        <div id="color-display"></div>
+        <p id="target-color">Match the color: <span id="target-color-name"></span></p>
+        <div id="color-options"></div>
+        <button id="restart-button" onclick="startGame()">Restart</button>
+    </div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-top">
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <div class="quicklinks">
+        <ul>
+          <li>Blog</li>
+          <li>Game</li>
+          <li>Tdee</li>
+          
+        </ul>
+        <ul>
+          <li>Doctor</li>
+          <li>Prescription</li>
+          <li>Appointment</li>
+          
+        </ul>
+        <ul>
+          <li>Predict</li>
+          <li>Quiz</li>
+          <li>Nutrition</li>
+        </ul>
+        <ul>
+          <li>Diet</li>
+          <li>Events</li>
+          <li>Disease</li>
+        </ul></div>
+      </div>
+      <div class="about">
+      <div class="footer-company">
+        <div class='Company'>
+          <h3>Company</h3>
+          <ul>
+            <li>About us</li>
+            <li>Team</li>
+            <li>Careers</li>
+          </ul>
+        </div>
+        <div class='Contact'>
+          <h3>Contact</h3>
+          <ul>
+            <li>Help & Support</li>
+            <li>Partner with us</li>
+            <li>Advertise with us</li>
+          </ul>
+        </div>
+        <div class='Legal'>
+          <h3>Legal</h3>
+          <ul>
+            <li>Terms & Conditions</li>
+            <li>Refund & Cancellation</li>
+            <li>Privacy Policy</li>
+            <li>Cookie Policy</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-subscribe">
+        <h3>Follow Us</h3>
+        <p>Receive exclusive offers in your mailbox</p>
+        <div class="subscribe-box">
+          <input type="email" placeholder="Enter Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>All rights Reserved © HealthHive</p>
+      <p>Made with <span role="img" aria-label="love">🤍</span></p>
+    </div>
+  </footer>
+
+  <script>
+    let gameStarted = false;
+    let score = 0;
+    let highScore = 0;
+    let timer;
+
+    const colors = ['#ff0000', '#0000ff', '#00ff00', '#ffff00', '#ffa500', '#800080'];
+    const colorNames = ['Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple'];
+    let targetColor;
+
+    function toggleStartButton() {
+        const checkbox = document.getElementById('game-start-checkbox');
+        const startButton = document.getElementById('start-button');
+        startButton.disabled = !checkbox.checked;
+    }
+
+    function startGame() {
+        gameStarted = true;
+        score = 0;
+        document.getElementById('instructions').style.display = 'none';
+        document.getElementById('game-start-checkbox').disabled = true;
+        document.getElementById('start-button').disabled = true;
+        document.getElementById('game-content').style.display = 'block';
+        generateRandomColor();
+        updateScore();
+        timer = setInterval(() => {
+            generateRandomColor();
+        }, 1750);
+
+        setTimeout(() => {
+            endGame();
+        }, 30000);
+    }
+
+    function generateRandomColor() {
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        targetColor = colors[randomIndex];
+        const targetColorName = colorNames[randomIndex];
+
+        document.getElementById('color-display').style.backgroundColor = targetColor;
+        document.getElementById('target-color-name').innerText = targetColorName;
+
+        updateColorOptions();
+    }
+
+    function updateColorOptions() {
+        const colorOptionsContainer = document.getElementById('color-options');
+        colorOptionsContainer.innerHTML = '';
+
+        colors.forEach((color) => {
+            const colorOption = document.createElement('div');
+            colorOption.className = 'color-option';
+            colorOption.style.backgroundColor = color;
+            colorOption.onclick = () => handleColorSelection(color);
+            colorOptionsContainer.appendChild(colorOption);
+        });
+    }
+
+    function handleColorSelection(selectedColor) {
+        if (gameStarted) {
+            if (selectedColor === targetColor) {
+                score++;
+            } else {
+                score--;
+            }
+            updateScore();
+            generateRandomColor();
+        }
+    }
+
+    function updateScore() {
+        document.getElementById('score').innerText = `Score: ${score}`;
+        if (score > highScore) {
+            highScore = score;
+            document.getElementById('high-score').innerText = `High Score: ${highScore}`;
+        }
+    }
+
+    function endGame() {
+        clearInterval(timer);
+        gameStarted = false;
+        document.getElementById('game-start-checkbox').disabled = false;
+        document.getElementById('start-button').disabled = false;
+        document.getElementById('game-content').style.display = 'none';
+
+        alert(`Game Over!\nTime's up!\nYour Score: ${score}`);
+    }
+</script>
+
+</body>
+</html>

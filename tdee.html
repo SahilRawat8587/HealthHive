@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>HealthHive-Quiz</title>
+
+    <!-- Favicon and Apple icons -->
+    <link href="icons/favicon.png" rel="icon">
+    <link href="icons/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="icons/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Bootstrap and Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    
+    <!-- Select2 Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+    <link href="css/main.css" rel="stylesheet"/>
+
+    <style>
+        
+        /* Base styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h3, h4 {
+            color: #333;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form styles */
+        .form-control {
+            border-radius: 30px;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary {
+            border-radius: 30px;
+            background-color: #007bff;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Recent data cards */
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .text-muted {
+            font-size: 12px;
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive styling */
+        @media (max-width: 767px) {
+            .card {
+                margin-bottom: 20px;
+            }
+        }
+    
+       
+
+        .hero{
+            background: url(./assets/Bg.png) repeat ;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <!-- Header Section -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container">
+  <a class="navbar-brand" href="./Index.html">HealthHive</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="./Index.html">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+      </li>
+      <!-- Dropdown for Services -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Services
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+          <li><a class="dropdown-item" href="#">TDEE Calculator</a></li>
+          <li><a class="dropdown-item" href="./pediction.html">Cancer Prediction</a></li>
+          <li><a class="dropdown-item" href="./quiz.html">Mental Health Quiz</a></li>
+          <li><a class="dropdown-item" href="./game.html">Game</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Login Button -->
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="btn btn-outline-primary" href="#">Login</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+</header>
+
+<div class="hero py-5">
+<div class="container mt-5 fade-in">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="text-center"><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;Recent Calculated</h4>
+
+            <!-- Sample recent data cards (can be replaced with JavaScript logic to fetch/display data) -->
+            <div class="card my-2">
+                <div class="card-header m-0 py-2">
+                    Latest
+                </div>
+                <div class="card-body p-3">
+                    <span><span class="fw-bolder">Calories: </span>2500 Calories/day</span><br>
+                    <span><span class="fw-bolder">BMI: </span>22.5 kg/m2</span><br>
+                    <span><span class="fw-bolder">Protein: </span>150 g</span><br>
+                    <span><span class="fw-bolder">Fat: </span>80 g</span><br>
+                    <span><span class="fw-bolder">Carbohydrates: </span>300 g</span><br>
+                    <div>
+                        <span class="text-muted text-xs">2024-09-18</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional recent entry -->
+            <div class="card my-2">
+                <div class="card-body p-3">
+                    <span><span class="fw-bolder">Calories: </span>2300 Calories/day</span><br>
+                    <span><span class="fw-bolder">BMI: </span>21.5 kg/m2</span><br>
+                    <div>
+                        <span class="text-muted text-xs">2024-09-17</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-title">
+                    <h3 class="text-center pt-3">TDEE Calculator</h3>
+                </div>
+                <div class="card-body">
+                    <form id="tdeeForm" action="#" method="post">
+                        <div class="form-group mt-2">
+                            <label for="age">Age:</label>
+                            <input type="number" name="age" class="form-control" id="age" placeholder="Age" required>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="gender">Gender:</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="height">Height (cm):</label>
+                            <input type="number" class="form-control" id="height" name="height" placeholder="Height in cm" required>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" class="form-control" id="weight" name="weight" placeholder="Weight in kg" required>
+                        </div>
+                
+                        <div class="form-group mt-2">
+                            <label for="activityLevel">Activity Level:</label>
+                            <select class="form-control" id="activityLevel" name="activityLevel" required>
+                                <option value="level1">Sedentary (little or no exercise)</option>
+                                <option value="level2">Lightly active (light exercise/sports 1-3 days/week)</option>
+                                <option value="level3">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+                                <option value="level4">Very active (hard exercise/sports 6-7 days/week)</option>
+                                <option value="level5">Super active (very hard exercise/sports & physical job or 2x training)</option>
+                            </select>
+                        </div>
+                
+                        <button type="submit" class="btn btn-primary mt-3 w-100">Calculate</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-top">
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <div class="quicklinks">
+        <ul>
+          <li>Blog</li>
+          <li>Game</li>
+          <li>Tdee</li>
+          
+        </ul>
+        <ul>
+          <li>Doctor</li>
+          <li>Prescription</li>
+          <li>Appointment</li>
+          
+        </ul>
+        <ul>
+          <li>Predict</li>
+          <li>Quiz</li>
+          <li>Nutrition</li>
+        </ul>
+        <ul>
+          <li>Diet</li>
+          <li>Events</li>
+          <li>Disease</li>
+        </ul></div>
+      </div>
+      <div class="about">
+      <div class="footer-company">
+        <div class='Company'>
+          <h3>Company</h3>
+          <ul>
+            <li>About us</li>
+            <li>Team</li>
+            <li>Careers</li>
+          </ul>
+        </div>
+        <div class='Contact'>
+          <h3>Contact</h3>
+          <ul>
+            <li>Help & Support</li>
+            <li>Partner with us</li>
+            <li>Advertise with us</li>
+          </ul>
+        </div>
+        <div class='Legal'>
+          <h3>Legal</h3>
+          <ul>
+            <li>Terms & Conditions</li>
+            <li>Refund & Cancellation</li>
+            <li>Privacy Policy</li>
+            <li>Cookie Policy</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-subscribe">
+        <h3>Follow Us</h3>
+        <p>Receive exclusive offers in your mailbox</p>
+        <div class="subscribe-box">
+          <input type="email" placeholder="Enter Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>All rights Reserved © HealthHive</p>
+      <p>Made with <span role="img" aria-label="love">🤍</span></p>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

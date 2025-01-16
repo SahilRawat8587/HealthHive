@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>HealthHive</title>
+
+    <!-- Favicon and Apple icons -->
+    <link href="icons/favicon.png" rel="icon">
+    <link href="icons/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="icons/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Bootstrap and Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    
+    <!-- Select2 Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+    <!-- Custom CSS -->
+    <link href="css/main.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    
+    <!-- Custom Inline CSS for Animations and Padding/Margins -->
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar styling */
+.navbar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-menu {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Simple fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Login button style */
+.btn-outline-primary {
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+
+        .main {
+            padding: 40px 0;
+        }
+
+        .container {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+
+        /* Button and Icon Animations */
+        .back-to-top {
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background-color: #0056b3;
+        }
+
+        .btn, .bi {
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover, .bi:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Preloader Animation */
+        #preloader {
+            display: none; /* Hide it unless you plan to use it */
+        }
+
+        /* Smooth Scroll for the page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Select2 Styles */
+        .select2-container .select2-selection--single {
+            height: 38px;
+            padding: 5px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+        }
+
+        /* Section Animations */
+        [data-aos] {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+        }
+
+        /* Padding/Margins */
+        .p-0 {
+            padding: 0;
+        }
+
+        .m-0 {
+            margin: 0;
+        }
+
+        .mb-5 {
+            margin-bottom: 40px;
+        }
+
+        .pt-5 {
+            padding-top: 40px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero{
+            background: url(./assets/Bg.png) repeat ;
+        }
+
+        .small{
+            height: 3rem;
+            width: 3rem;
+        }
+
+        /* Minimalist styling for the subscription section */
+.subscription-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f4f8; /* Light background for a soft aesthetic */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease-in-out; /* Animation for hover effect */
+    max-width: 600px;
+    margin: 35px auto;
+}
+
+.feature{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    text-align: center;
+    background-color: #f0f4f8; /* Light background for a soft aesthetic */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease-in-out; /* Animation for hover effect */
+    max-width: 20vw;
+    margin: 35px auto;
+    min-height:25vh;
+    max-height: 30vh; 
+
+}
+
+a{
+  text-decoration: none;
+ 
+}
+
+/* Heading style */
+.subscription-section h2 {
+    color: #007bff; /* Deep green text for a natural, health-related vibe */
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Subtext style */
+.subscription-section p {
+    color: #6c757d;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form input and button styling */
+.subscription-form {
+    display: flex;
+    width: 100%;
+}
+
+.subscription-form input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 16px;
+    color: #495057;
+    transition: all 0.3s ease;
+}
+
+.subscription-form input:focus {
+    border-color: #007bff ; /* Lighter green on focus */
+    box-shadow: 0 0 5px #0056b3
+}
+
+.subscription-form button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscription-form button:hover {
+    background-color: #0056b3; /* Slight color change on hover */
+}
+
+/* Hover effect for entire section */
+.subscription-section:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+    </style>
+
+    <!-- AOS for animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">HealthHive</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+        </li>
+        <!-- Dropdown for Services -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+            <li><a class="dropdown-item" href="./tdee.html">TDEE Calculator</a></li>
+            <li><a class="dropdown-item" href="./pediction.html">Cancer Prediction</a></li>
+            <li><a class="dropdown-item" href="./quiz.html">Mental Health Quiz</a></li>
+            <li><a class="dropdown-item" href="./game.html">Game</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Login Button -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="btn btn-outline-primary" href="#">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  </header>
+
+  <!-- Main Content -->
+  <main id="main" class="main p-0 fade-in hero">
+    <div class="container">
+      <!-- Dynamic Content -->
+      <section  data-aos="fade-up">
+        <!-- <div class="container col-xxl-8 px-2 py-2"> -->
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-2">
+              <div class="col-10 col-sm-8 col-lg-6">
+                <img src="./assets/kisspng-physician-diabetes-mellitus-computer-disease-preve-doctor-and-computer-5a99b82dcadc58 1.png" class="d-block mx-lg-auto img-fluid" alt="Doctor" width="700" height="500" loading="lazy">
+              </div>
+              <div class="col-lg-6">
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Empowering Your Health Journey</h1>
+                <p class="lead">At HealthHive, we bring you personalized insights, tools, and resources to take control of your well-being and live your healthiest life</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                  <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Proceed</button>
+                  <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button> -->
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+      </section>
+
+      <section data-aos="fade-up">
+        <!-- <h3>Another Section</h3> -->
+        <div class="container px-4 py-2">
+            <h2 class="pb-2 border-bottom">Categories</h2>
+        
+            <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-2">
+                <div class="col">
+                    <div class="row row-cols-1 row-cols-sm-2 g-4">
+                        
+                      <div class="col d-flex flex-column gap-2 feature">
+                        <!-- <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 small" height="3rem" width="3rem">
+                          <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#collection"></use>
+                          </svg>
+                        </div> -->
+                        <a href="./quiz.html"><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">Quiz</h4>
+                        <p class="text-body-secondary">Assess Your Mental Well-being</p></a>
+                      </div>
+            
+                      
+                      <div class="col d-flex flex-column gap-2 feature">
+                        <!-- <div class="small feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                          <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#gear-fill"></use>
+                          </svg>
+                        </div> -->
+                        <a href="./pediction.html"><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">Prediction</h4>
+                        <p class="text-body-secondary">Understand Your Risk Level<p></a>
+                      </div>
+                    
+                      
+                      
+                      <div class="col d-flex flex-column gap-2 feature">
+                        <!-- <div class="small feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                          <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#speedometer"></use>
+                          </svg>
+                        </div> -->
+                        <a href="./tdee.html" ><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">TDEE Calculator</h4>
+                        <p class="text-body-secondary">Calculate Your Daily Calorie Needs</p>
+                      </a>
+                      </div>
+                    
+            
+                      <div class="col d-flex flex-column gap-2 feature">
+                        <!-- <div class="small feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                          <svg class="bi" width="1em" height="1em">
+                            <use xlink:href="#table"></use>
+                          </svg>
+                        </div> -->
+                        <a href="#" ><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">Events</h4>
+                        <p class="text-body-secondary">Stay Informed and Engaged</p></a>
+                      </div>
+                    </div>
+                  </div>
+              
+                <div class="col d-flex flex-column align-items-start gap-2">
+                    <div class="row row-cols-1 row-cols-sm-2 g-4">
+                        
+                        <div class="col d-flex flex-column gap-2 feature">
+                          <!-- <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 small" height="3rem" width="3rem">
+                            <svg class="bi" width="1em" height="1em">
+                              <use xlink:href="#collection"></use>
+                            </svg>
+                          </div> -->
+                          <a href="#" ><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">Doctor Consultation</h4>
+                          <p class="text-body-secondary">Your Health, Your Priority</p></a>
+                        </div>
+                        
+              
+                        <div class="col d-flex flex-column gap-2 feature">
+                          <!-- <div class="small feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                              <use xlink:href="#gear-fill"></use>
+                            </svg>
+                          </div> -->
+                          <a href="#" ><h4 class="fw-semibold mb-0 text-body-emphasis mb-3"> Nutrition</h4>
+                          <p class="text-body-secondary">Fuel Your Body Right<p></a>
+                        </div>
+              
+                        <div class="col d-flex flex-column gap-2 feature">
+                          <!-- <div class="small feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                              <use xlink:href="#speedometer"></use>
+                            </svg>
+                          </div> -->
+                          <a href="./game.html" ><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">Game</h4>
+                          <p class="text-body-secondary">Boost Your Mood and Mind</p></a>
+                        </div>
+              
+                        <div class="col d-flex flex-column gap-2 feature">
+                          <!-- <div class="small feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                              <use xlink:href="#table"></use>
+                            </svg>
+                          </div> -->
+                          <a href="#" ><h4 class="fw-semibold mb-0 text-body-emphasis mb-3">Blog</h4>
+                          <p class="text-body-secondary">Your Health, Your Knowledge</p></a>
+                        </div>
+                      </div>
+              </div>
+        
+              
+            </div> 
+          
+            
+          </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="subscription-section">
+    <h2>Stay Updated With HealthHive!</h2>
+    <p>Stay informed and empowered with our comprehensive health guides and resources.</p>
+    <form class="subscription-form">
+        <input type="email" placeholder="Enter Your Email" required>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</div>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <div class="quicklinks">
+        <ul>
+          <li>Blog</li>
+          <li>Game</li>
+          <li>Tdee</li>
+          
+        </ul>
+        <ul>
+          <li>Doctor</li>
+          <li>Prescription</li>
+          <li>Appointment</li>
+          
+        </ul>
+        <ul>
+          <li>Predict</li>
+          <li>Quiz</li>
+          <li>Nutrition</li>
+        </ul>
+        <ul>
+          <li>Diet</li>
+          <li>Events</li>
+          <li>Disease</li>
+        </ul></div>
+      </div>
+      <div class="about">
+      <div class="footer-company">
+        <div class='Company'>
+          <h3>Company</h3>
+          <ul>
+            <li>About us</li>
+            <li>Team</li>
+            <li>Careers</li>
+          </ul>
+        </div>
+        <div class='Contact'>
+          <h3>Contact</h3>
+          <ul>
+            <li>Help & Support</li>
+            <li>Partner with us</li>
+            <li>Advertise with us</li>
+          </ul>
+        </div>
+        <div class='Legal'>
+          <h3>Legal</h3>
+          <ul>
+            <li>Terms & Conditions</li>
+            <li>Refund & Cancellation</li>
+            <li>Privacy Policy</li>
+            <li>Cookie Policy</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-subscribe">
+        <h3>Follow Us</h3>
+        <p>Receive exclusive offers in your mailbox</p>
+        <div class="subscribe-box">
+          <input type="email" placeholder="Enter Your email" />
+          <button>Subscribe</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>All rights Reserved © HealthHive</p>
+      <p>Made with <span role="img" aria-label="love">🤍</span></p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS, AOS, and Custom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+      AOS.init(); // Initialize AOS animations
+  </script>
+  
+  <script type="text/javascript">
+    (function(d, m) {
+        var kommunicateSettings = {
+            "appId": "387356129c9d1c73685eabfc441137b9c",
+            "automaticChatOpenOnNavigation": true,
+            "popupWidget": true
+        };
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0];
+        h.appendChild(s);
+        window.kommunicate = m;
+        m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+  </script>
+
+</body>
+
+</html>
